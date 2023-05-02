@@ -1,0 +1,52 @@
+---
+title: "Research Workshop"
+output: html_notebook
+---
+
+
+
+```{r}
+
+#loading data
+RW_filtered.csv <- read.csv("C:/Users/arash/AppData/Local/Temp/RW_April_26__2023_13_HnBQPD.22", header=FALSE, comment.char="#")
+
+
+#age groups
+RW_filtered.csv.new<- RW_filtered.csv[-c(1,2,3),]
+hist(as.numeric(RW_filtered.csv.new$V11), col="blue", main="Histogram of Different Ages in Our Sample", xlab="Age", ylab="Frequency")
+
+#define eastern countries
+eastern_countries <- c("Bulgaria","Republic of Moldova", "Hungary", "Poland", "Romania", "Slovakia")
+
+
+
+
+#adding the "Region" column to the dataset
+RW_filtered.csv.new$region <- ifelse(RW_filtered.csv.new$V13 %in% eastern_countries, "Eastern", "Western")
+head(RW_filtered.csv.new)
+
+
+# Create separate data frames for Eastern and Western participants
+eastern_data <- subset(RW_filtered.csv.new, region == "Eastern")
+western_data <- subset(RW_filtered.csv.new, region == "Western")
+
+
+# Get descriptive statistics for Eastern participants
+summary(eastern_data)
+
+# Get descriptive statistics for Western participants
+summary(western_data)
+
+# Get descriptive statistics for the overall dataset
+summary(RW_filtered.csv.new)
+
+
+
+
+
+
+
+
+```
+
+
